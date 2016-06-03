@@ -1,7 +1,338 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-</body>
+	<head>
+		<title>Sudoku Solver</title>
+
+		<style>
+			body {
+				background: url("http://wallpapercave.com/wp/K4u5WUq.jp"g);
+				background-size: 1920px 1080px;
+    			background-repeat: no-repeat;
+			}
+			h1#title1 {
+				text-align: center;
+				font-family: Verdana;
+				color: 	#f2f2c0;
+			}
+			table#board {
+				margin-left: auto;
+				margin-right: auto;
+			}
+			td#block1 {
+				background-color: #ff99ff;
+			}
+			td#block2 {
+				background-color: #ff99b3;
+			}
+			td#block3 {
+				background-color: #ffb399;
+			}
+			td#block4 {
+				background-color: #4dffa6;
+			}
+			td#block5 {
+				background-color: #9fff80;
+			}
+			td#block6 {
+				background-color: #ffd24d;
+			}
+			td#block7 {
+				background-color: #99ccff;
+			}
+			td#block8 {
+				background-color: #9999ff;
+			}
+			td#block9 {
+				background-color: #cc99ff;
+			}
+			input#button1 {
+				margin: auto;
+				display: block;
+			}
+			button#button2 {
+				margin: auto;
+				display: block;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1 id="title1">Sudoku Solver</h1><br>
+		<form name="givens" onsubmit="return solve();">
+			<!-- Creates the sudoku board-->
+			<table id="board">
+				<tr>
+					<td id="block1">
+						<input type="number" min="1" max="9" style="width: 23px" name="11">
+					</td>
+					<td id="block1">
+						<input type="number" min="1" max="9" style="width: 23px" name="12">
+					</td>
+					<td id="block1">
+						<input type="number" min="1" max="9" style="width: 23px" name="13">
+					</td>
+					<td id="block2">
+						<input type="number" min="1" max="9" style="width: 23px" name="14">
+					</td>
+					<td id="block2">
+						<input type="number" min="1" max="9" style="width: 23px" name="15">
+					</td>
+					<td id="block2">
+						<input type="number" min="1" max="9" style="width: 23px" name="16">
+					</td>
+					<td id="block3">
+						<input type="number" min="1" max="9" style="width: 23px" name="17">
+					</td>
+					<td id="block3">
+						<input type="number" min="1" max="9" style="width: 23px" name="18">
+					</td>
+					<td id="block3">
+						<input type="number" min="1" max="9" style="width: 23px" name="19">
+					</td>
+				</tr>
+				<tr>
+					<td id="block1">
+						<input type="number" min="1" max="9" style="width: 23px" name="21">
+					</td>
+					<td id="block1">
+						<input type="number" min="1" max="9" style="width: 23px" name="22">
+					</td>
+					<td id="block1">
+						<input type="number" min="1" max="9" style="width: 23px" name="23">
+					</td>
+					<td id="block2">
+						<input type="number" min="1" max="9" style="width: 23px" name="24">
+					</td>
+					<td id="block2">
+						<input type="number" min="1" max="9" style="width: 23px" name="25">
+					</td>
+					<td id="block2">
+						<input type="number" min="1" max="9" style="width: 23px" name="26">
+					</td>
+					<td id="block3">
+						<input type="number" min="1" max="9" style="width: 23px" name="27">
+					</td>
+					<td id="block3">
+						<input type="number" min="1" max="9" style="width: 23px" name="28">
+					</td>
+					<td id="block3">
+						<input type="number" min="1" max="9" style="width: 23px" name="29">
+					</td>
+				</tr>
+				<tr>
+					<td id="block1">
+						<input type="number" min="1" max="9" style="width: 23px" name="31">
+					</td>
+					<td id="block1">
+						<input type="number" min="1" max="9" style="width: 23px" name="32">
+					</td>
+					<td id="block1">
+						<input type="number" min="1" max="9" style="width: 23px" name="33">
+					</td>
+					<td id="block2">
+						<input type="number" min="1" max="9" style="width: 23px" name="34">
+					</td>
+					<td id="block2">
+						<input type="number" min="1" max="9" style="width: 23px" name="35">
+					</td>
+					<td id="block2">
+						<input type="number" min="1" max="9" style="width: 23px" name="36">
+					</td>
+					<td id="block3">
+						<input type="number" min="1" max="9" style="width: 23px" name="37">
+					</td>
+					<td id="block3">
+						<input type="number" min="1" max="9" style="width: 23px" name="38">
+					</td>
+					<td id="block3">
+						<input type="number" min="1" max="9" style="width: 23px" name="39">
+					</td>
+				</tr>
+				<tr>
+					<td id="block4">
+						<input type="number" min="1" max="9" style="width: 23px" name="41">
+					</td>
+					<td id="block4">
+						<input type="number" min="1" max="9" style="width: 23px" name="42">
+					</td>
+					<td id="block4">
+						<input type="number" min="1" max="9" style="width: 23px" name="43">
+					</td>
+					<td id="block5">
+						<input type="number" min="1" max="9" style="width: 23px" name="44">
+					</td>
+					<td id="block5">
+						<input type="number" min="1" max="9" style="width: 23px" name="45">
+					</td>
+					<td id="block5">
+						<input type="number" min="1" max="9" style="width: 23px" name="46">
+					</td>
+					<td id="block6">
+						<input type="number" min="1" max="9" style="width: 23px" name="47">
+					</td>
+					<td id="block6">
+						<input type="number" min="1" max="9" style="width: 23px" name="48">
+					</td>
+					<td id="block6">
+						<input type="number" min="1" max="9" style="width: 23px" name="49">
+					</td>
+				</tr>
+				<tr>
+					<td id="block4">
+						<input type="number" min="1" max="9" style="width: 23px" name="51">
+					</td>
+					<td id="block4">
+						<input type="number" min="1" max="9" style="width: 23px" name="52">
+					</td>
+					<td id="block4">
+						<input type="number" min="1" max="9" style="width: 23px" name="53">
+					</td>
+					<td id="block5">
+						<input type="number" min="1" max="9" style="width: 23px" name="54">
+					</td>
+					<td id="block5">
+						<input type="number" min="1" max="9" style="width: 23px" name="55">
+					</td>
+					<td id="block5">
+						<input type="number" min="1" max="9" style="width: 23px" name="56">
+					</td>
+					<td id="block6">
+						<input type="number" min="1" max="9" style="width: 23px" name="57">
+					</td>
+					<td id="block6">
+						<input type="number" min="1" max="9" style="width: 23px" name="58">
+					</td>
+					<td id="block6">
+						<input type="number" min="1" max="9" style="width: 23px" name="59">
+					</td>
+				</tr>
+				<tr>
+					<td id="block4">
+						<input type="number" min="1" max="9" style="width: 23px" name="61">
+					</td>
+					<td id="block4">
+						<input type="number" min="1" max="9" style="width: 23px" name="62">
+					</td>
+					<td id="block4">
+						<input type="number" min="1" max="9" style="width: 23px" name="63">
+					</td>
+					<td id="block5">
+						<input type="number" min="1" max="9" style="width: 23px" name="64">
+					</td>
+					<td id="block5">
+						<input type="number" min="1" max="9" style="width: 23px" name="65">
+					</td>
+					<td id="block5">
+						<input type="number" min="1" max="9" style="width: 23px" name="66">
+					</td>
+					<td id="block6">
+						<input type="number" min="1" max="9" style="width: 23px" name="67">
+					</td>
+					<td id="block6">
+						<input type="number" min="1" max="9" style="width: 23px" name="68">
+					</td>
+					<td id="block6">
+						<input type="number" min="1" max="9" style="width: 23px" name="69">
+					</td>
+				</tr>
+				<tr>
+					<td id="block7">
+						<input type="number" min="1" max="9" style="width: 23px" name="71">
+					</td>
+					<td id="block7">
+						<input type="number" min="1" max="9" style="width: 23px" name="72">
+					</td>
+					<td id="block7">
+						<input type="number" min="1" max="9" style="width: 23px" name="73">
+					</td>
+					<td id="block8">
+						<input type="number" min="1" max="9" style="width: 23px" name="74">
+					</td>
+					<td id="block8">
+						<input type="number" min="1" max="9" style="width: 23px" name="75">
+					</td>
+					<td id="block8">
+						<input type="number" min="1" max="9" style="width: 23px" name="76">
+					</td>
+					<td id="block9">
+						<input type="number" min="1" max="9" style="width: 23px" name="77">
+					</td>
+					<td id="block9">
+						<input type="number" min="1" max="9" style="width: 23px" name="78">
+					</td>
+					<td id="block9">
+						<input type="number" min="1" max="9" style="width: 23px" name="79">
+					</td>
+				</tr>
+				<tr>
+					<td id="block7">
+						<input type="number" min="1" max="9" style="width: 23px" name="81">
+					</td>
+					<td id="block7">
+						<input type="number" min="1" max="9" style="width: 23px" name="82">
+					</td>
+					<td id="block7">
+						<input type="number" min="1" max="9" style="width: 23px" name="83">
+					</td>
+					<td id="block8">
+						<input type="number" min="1" max="9" style="width: 23px" name="84">
+					</td>
+					<td id="block8">
+						<input type="number" min="1" max="9" style="width: 23px" name="85">
+					</td>
+					<td id="block8">
+						<input type="number" min="1" max="9" style="width: 23px" name="86">
+					</td>
+					<td id="block9">
+						<input type="number" min="1" max="9" style="width: 23px" name="87">
+					</td>
+					<td id="block9">
+						<input type="number" min="1" max="9" style="width: 23px" name="88">
+					</td>
+					<td id="block9">
+						<input type="number" min="1" max="9" style="width: 23px" name="89">
+					</td>
+				</tr>
+				<tr>
+					<td id="block7">
+						<input type="number" min="1" max="9" style="width: 23px" name="91">
+					</td>
+					<td id="block7">
+						<input type="number" min="1" max="9" style="width: 23px" name="92">
+					</td>
+					<td id="block7">
+						<input type="number" min="1" max="9" style="width: 23px" name="93">
+					</td>
+					<td id="block8">
+						<input type="number" min="1" max="9" style="width: 23px" name="94">
+					</td>
+					<td id="block8">
+						<input type="number" min="1" max="9" style="width: 23px" name="95">
+					</td>
+					<td id="block8">
+						<input type="number" min="1" max="9" style="width: 23px" name="96">
+					</td>
+					<td id="block9">
+						<input type="number" min="1" max="9" style="width: 23px" name="97">
+					</td>
+					<td id="block9">
+						<input type="number" min="1" max="9" style="width: 23px" name="98">
+					</td>
+					<td id="block9">
+						<input type="number" min="1" max="9" style="width: 23px" name="99">
+					</td>
+				</tr>
+			</table><br>
+
+			<!-- Button to submit the board to the function and solve it-->
+			<input id="button1" type="submit" value="Solve the puzzle!"/><br>
+		</form>
+
+		<!-- button to reset the input fields-->
+		<button id="button2" onclick="reset()">Reset</button>
+
+		<script type="text/javascript" src="jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="SolveScript.js"></script>
+
+	</body>
 </html>
