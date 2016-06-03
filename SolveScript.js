@@ -14,7 +14,6 @@ function solve() {
 	var backtrack = false;
 	var temp;
 
-	alert("hi");
 	var curBoard = new Array(dimension); //creates the sudoku board using a 2D array
 	for (var i = 0; i < dimension; i++) {
 		curBoard[i] = new Array(dimension);
