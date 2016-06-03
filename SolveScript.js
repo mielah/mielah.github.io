@@ -48,7 +48,14 @@ function solve() {
 	for (var r = 0; r < dimension; r++) { //updates the 2D array board with the givens
 		for (var c = 0; c < dimension; c++) {
 			if (curBoard[r][c] != 0) { //if the cell was a given, there are no other possibilities
-				defaultPossibilities[r + "," + c] = 0;
+				//checks if the givens are valid
+				if (checkRow(r, c, curBoard[r][c], curBoard) && checkCol(r, c, curBoard[r][c], curBoard) && checkBlock(r, c, curBoard[r][c], curBoard)) {
+					defaultPossibilities[r + "," + c] = 0;
+				}
+				else {
+					alert("No Solution!");
+					return false;
+				}
 			}
 			else {
 				for (var i = 1; i < 10; i++) { //checks whether the numbers 1-9 are possible in that cell
@@ -78,7 +85,7 @@ function solve() {
 				if (curC == 0) { //previous cell was in the row above
 					if (curR == 0) { //currently at the first cell
 						alert("No Solution!");
-						return -1;
+						return false;
 					}
 					curR--;
 					curC = dimension - 1;
