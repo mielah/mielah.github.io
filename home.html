@@ -10,17 +10,36 @@
     			background-repeat: no-repeat;
 			}
 
-			p#credits {
+			#credits {
 				font-family: Verdana;
 				font-size: 10px;
+				text-align: right;
+			}
+
+			#transparentImg {
+				position: absolute;
+				top: 0;
+				left: 0;
+				opacity: 0;
+				width: 1920px;
+				height: 1080px;
 			}
 
 		</style>
 	</head>
 	
 	<body>
-		<p name="credits">
-			Art by Matei Apostolescu: <a href="http://www.013a.com/index.html">www.013a.com</a>
+		<p id="credits">
+			Art by Matei Apostolescu: <a style="text-decoration: none;" href="http://www.013a.com/index.html">www.013a.com</a>
 		</p> 
+
+		<!--transparent image that will be used for the map-->
+		<img id="transparentImg" src="white.png" usemap="#navigateMap">
+
+		<map name="navigateMap">
+			<area name="sudokuSolver" shape="rect" coords="650,100,810,210" href=index.html>
+			<area name="tableOfContents" shape="circle" coords="1230,440,260" href="help.html">
+		</map>
+
 	</body>
 </html>
